@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_gallery/FirebaseFuncs.dart';
 import 'package:go_gallery/authentication/auth.dart';
 import 'package:go_gallery/components/EmailTextField.dart';
 import 'package:go_gallery/components/GoogleSignInButton.dart';
@@ -73,18 +75,18 @@ class _CreateAccountState extends State<CreateAccount> {
                   width: screenWidth * 0.90,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_emailEditingController.text == "" || _passwordEditingController.text == "" || _nameEditingController == "") {
-                        setState(() {
-                          errorText = "One or more fields are empty!"; 
-                        });
-                      } else {
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome()), (Route<dynamic> route) => false);
-                      }
+                      // if (_emailEditingController.text == "" || _passwordEditingController.text == "" || _nameEditingController == "") {
+                      //   setState(() {
+                      //     errorText = "One or more fields are empty!"; 
+                      //   });
+                      // } else {
+                      //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome()), (Route<dynamic> route) => false);
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       foregroundColor: Colors.white,
-                      backgroundColor: Color.fromRGBO(255, 191, 99, 1),
+                      backgroundColor: const Color.fromRGBO(255, 191, 99, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24),
                       ),
@@ -129,7 +131,14 @@ class _CreateAccountState extends State<CreateAccount> {
                 GoogleBtn1(onPressed: () async {
                   dynamic credGoogle = await signInWithGoogle();
                   if (credGoogle.runtimeType != String) {
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome()), (Route<dynamic> route) => false);
+                    dynamic userDocExists = await doesUserExist(credGoogle.user!.uid); 
+
+                    if (userDocExists == true) {
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome(uid: credGoogle.user!.uid)), (Route<dynamic> route) => false);
+                    } else if (userDocExists != true && userDocExists.runtimeType != FirebaseException){
+                      await addUserDoc(credGoogle.user!.uid);
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome(uid: credGoogle.user!.uid)), (Route<dynamic> route) => false);
+                    }
                   }
 
                 }),

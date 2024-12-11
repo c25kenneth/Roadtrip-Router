@@ -43,6 +43,9 @@ dependencies:
   google_sign_in: ^6.2.1
   popover: ^0.3.0+1
   readmore: ^3.0.0
+  cloud_firestore: 4.17.5
+  google_maps_flutter: ^2.9.0
+  wave: ^0.2.2
 
 dev_dependencies:
   flutter_test:

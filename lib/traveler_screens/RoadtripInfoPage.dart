@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_gallery/traveler_screens/Roadtrips.dart';
+import 'package:go_gallery/traveler_screens/TripMap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:readmore/readmore.dart';
 
 class TripInfoPage extends StatefulWidget {
   final double rating; 
-  final String startingLocation; 
+  final String startingLocation;
+  final double startingLat; 
+  final double startingLong; 
+  final double endingLat; 
+  final double endingLong;  
   final String title; 
   final String description; 
   final String imageURL; 
 
-  const TripInfoPage({super.key, required this.rating, required this.startingLocation, required this.description, required this.imageURL, required this.title});
+  const TripInfoPage({super.key, required this.rating, required this.startingLocation, required this.description, required this.imageURL, required this.title, required this.startingLat, required this.startingLong, required this.endingLat, required this.endingLong});
 
   @override
   State<TripInfoPage> createState() => _TripInfoPageState();
@@ -155,7 +160,8 @@ class _TripInfoPageState extends State<TripInfoPage> {
                   margin: EdgeInsets.only(bottom: 50.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TripLocations()));
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TripLocations()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => TripMap(startingLat: widget.startingLat, startingLong: widget.startingLong, endingLat: widget.endingLat, endingLong: widget.endingLong)));
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,

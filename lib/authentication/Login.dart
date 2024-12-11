@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_gallery/FirebaseFuncs.dart';
 import 'package:go_gallery/authentication/auth.dart';
 import 'package:go_gallery/components/EmailTextField.dart';
 import 'package:go_gallery/components/GoogleSignInButton.dart';
@@ -69,13 +70,13 @@ class _LoginState extends State<Login> {
                   width: screenWidth * 0.90,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_emailEditingController.text == "" || _passwordEditingController.text == "") {
-                        setState(() {
-                          errorText = "One or more fields are empty!"; 
-                        });
-                      } else {
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome()), (Route<dynamic> route) => false);
-                      }
+                      // if (_emailEditingController.text == "" || _passwordEditingController.text == "") {
+                      //   setState(() {
+                      //     errorText = "One or more fields are empty!"; 
+                      //   });
+                      // } else {
+                      //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome()), (Route<dynamic> route) => false);
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
@@ -126,7 +127,14 @@ class _LoginState extends State<Login> {
                 GoogleBtn1(onPressed: () async {
                   dynamic credGoogle = await signInWithGoogle();
                   if (credGoogle.runtimeType != String) {
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome()), (Route<dynamic> route) => false);
+                    bool userDocExists = await doesUserExist(credGoogle.user!.uid); 
+
+                    if (userDocExists) {
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome(uid: credGoogle.user!.uid)), (Route<dynamic> route) => false);
+                    } else {
+                      await addUserDoc(credGoogle.user!.uid);
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => VisitorHome(uid: credGoogle.user!.uid)), (Route<dynamic> route) => false);
+                    }
                   }
 
                 }),

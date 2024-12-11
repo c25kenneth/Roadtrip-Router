@@ -15,9 +15,7 @@ class _TripLocationsState extends State<TripLocations> {
       appBar: AppBar(),
       body: Column(
         children: [
-          ExhibitionCard(),
-          ExhibitionCard(),
-          ExhibitionCard(),
+          
         ],
       ),
     );
