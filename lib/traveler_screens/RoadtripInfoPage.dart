@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_gallery/traveler_screens/CommentsPage.dart';
 import 'package:go_gallery/traveler_screens/Roadtrips.dart';
 import 'package:go_gallery/traveler_screens/TripMap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -157,7 +158,7 @@ class _TripInfoPageState extends State<TripInfoPage> {
 
                   Container(
                   width: screenWidth * 0.90,
-                  margin: EdgeInsets.only(bottom: 50.0),
+                  margin: EdgeInsets.only(bottom: 30.0),
                   child: ElevatedButton(
                     onPressed: () {
                       // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => TripLocations()));
@@ -182,6 +183,11 @@ class _TripInfoPageState extends State<TripInfoPage> {
                     ),
                   ),
                 ),
+
+                Center(child: InkWell(onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommentsPage()));
+                }, child: Text("What do others say?", style: TextStyle(color: Color.fromRGBO(255, 191, 99, 1), fontWeight: FontWeight.bold, fontSize: 17),))),
+                SizedBox(height: 50),
                 ],
               ),
             ),

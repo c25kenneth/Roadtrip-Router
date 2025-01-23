@@ -38,3 +38,12 @@ dynamic addTrip(String uid, String name, String startDate, String endDate, Strin
     return e;
   }
 }
+
+dynamic addComment(String userName, String when, String comment) async {
+  try {
+    await _db.collection('trips').doc("hPze5xs4K9sdKGKl37p3").collection('comments').add({"comment": comment, 'dateTime': when, "userName": userName});
+    return "success";
+  } catch (e) {
+    return e; 
+  }
+}

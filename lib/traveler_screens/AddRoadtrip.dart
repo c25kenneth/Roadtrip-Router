@@ -4,6 +4,7 @@ import 'package:go_gallery/FirebaseFuncs.dart';
 import 'package:go_gallery/components/TextInputFb1.dart';
 import 'package:go_gallery/components/TopBarFb2Small.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:location_picker_text_field/open_street_location_picker.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -69,13 +70,28 @@ class _AddRoadTripState extends State<AddRoadTrip> {
                       Container(width: width * 0.43, child: TextInputFb1(inputController: _endDateController, hintText: "End Date", prefixIcon: const Icon(Icons.calendar_month_outlined))),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(width: width * 0.43, child: TextInputFb1(inputController: _startLocationController, hintText: "Start Location", prefixIcon: const Icon(Icons.location_city))),
-                      const SizedBox(width: 15),
-                      Container(width: width * 0.43, child: TextInputFb1(inputController: _endLocationController, hintText: "End Location", prefixIcon: const Icon(Icons.location_city_outlined))),
-                    ],
+                  SizedBox(height: 25,),
+                  Container(
+                    width: width * 0.9,
+                    child: LocationPicker(
+                      label: "From",
+                      controller: _startLocationController,
+                      onSelect: (data){
+                        _startLocationController.text = data.displayname;
+                      },
+                    ),
+                  ),
+                  // Container(width: width * 0.43, child: TextInputFb1(inputController: _startLocationController, hintText: "Start Location", prefixIcon: const Icon(Icons.location_city))),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: width * 0.9,
+                    child: LocationPicker(
+                      label: "To",
+                      controller: _endLocationController,
+                      onSelect: (data){
+                        _endLocationController.text = data.displayname;
+                      },
+                    ),
                   ),
                   // Container(width: width * 0.9, child: TextInputFb1(inputController: _nameController, hintText: "Roadtrip Name", prefixIcon: const Icon(Icons.title_outlined))),
                   SizedBox(height: 25),

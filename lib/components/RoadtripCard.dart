@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -61,12 +62,16 @@ class TripCard extends StatelessWidget {
                       bottomLeft: Radius.circular(14),
                       bottomRight: Radius.circular(14),
                     ),
-                    child: Image.network(
+                    child: (imgUrl == "images/undraw_trip_rh66.svg") ? SvgPicture.asset(
+                      imgUrl,
+                      height: 120,
+                      fit: BoxFit.cover,
+                    ) : Image.network(
                       imgUrl,
                       width: width,
-                      height: 120, // Fixed height for the image
+                      height: 120,
                       fit: BoxFit.cover,
-                    ),
+                    ) 
                   ),
                   Positioned(
                     top: 8,

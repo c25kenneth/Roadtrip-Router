@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_gallery/LoadingScreen.dart';
 import 'package:go_gallery/Onboarding.dart';
 import 'package:go_gallery/components/RoadtripCard.dart';
@@ -211,24 +212,32 @@ class _VisitorHomeState extends State<VisitorHome> {
                           ),
                         ],
                       ),
-                      snapshot.data!.docs.isNotEmpty ? Text("No trips") : SizedBox(
-                        height: 200, // Fixed height for the second ListView
+                      snapshot.data!.docs.isEmpty ? Column(
+                        children: [
+                          const SizedBox(height: 15,),
+                          SizedBox(height: 175, child: SvgPicture.asset("images/undraw_dreamer_gb41.svg"),),
+                          const SizedBox(height: 25,),
+                          Text("No Roadtrips Yet", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),)
+                        ],
+                      ) : SizedBox(
+                        height: 200, 
                         child: ListView.separated(
-                          padding: EdgeInsets.only(right: 12.0),
-                          itemCount: roadtrips.length,
+                          padding: const EdgeInsets.only(right: 12.0),
+                          itemCount: snapshot.data!.docs.length,
                           scrollDirection: Axis.horizontal,
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           separatorBuilder: (context, index) => SizedBox(
                             width: 10,
                           ),
                           itemBuilder: (context, index) {
                             return TripCard(
                                 width: MediaQuery.of(context).size.width * 0.45,
-                                imgUrl: roadtrips[index]["imgUrl"],
-                                title: roadtrips[index]["title"],
-                                subtitle: roadtrips[index]["subtitle"],
+                                imgUrl: "images/undraw_trip_rh66.svg",
+                                title: snapshot.data!.docs[index]["name"],
+                                subtitle: snapshot.data!.docs[index]["finalLocation"],
                                 color: Colors.orange,
-                                onTapFunction: () {});
+                                onTapFunction: () {}
+                            );
                           },
                         ),
                       ),
