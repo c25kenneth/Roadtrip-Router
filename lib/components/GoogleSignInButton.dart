@@ -45,3 +45,32 @@ required this.onPressed,
         ));
   }
 }
+// Existing component in lib/components/GoogleSignInButton.dart
+import 'package:flutter/material.dart';
+
+class GoogleSignInButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20), // Added padding
+      decoration: BoxDecoration(
+        color: Colors.white, // Background color
+        borderRadius: BorderRadius.circular(8), // Rounded corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          )
+        ],
+      ),
+      child: FlatButton(
+        onPressed: () {
+          // Button logic here
+        },
+        child: Text('Sign in with Google', style: TextStyle(color: Colors.black)), // Adjusted text color
+      ),
+    );
+  }
+}
