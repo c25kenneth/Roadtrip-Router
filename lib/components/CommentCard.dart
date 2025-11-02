@@ -61,3 +61,10 @@ class CommentCard extends StatelessWidget {
     );
   }
 }
+
++   padding: const EdgeInsets.all(8.0),
+
++   margin: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+
++   crossAxisAlignment: CrossAxisAlignment.center,
++   children: [CircularProgressIndicator(), SizedBox(height: 20)],
