@@ -61,3 +61,25 @@ class CommentCard extends StatelessWidget {
     );
   }
 }
+
+Container(
+  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // Adjust padding for better UI
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        'User comment:',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      SizedBox(height: 5),
+      Text(
+        comment,
+        style: TextStyle(
+          color: Colors.grey[600],
+        ),
+      ),
+    ],
+  ),
+)
