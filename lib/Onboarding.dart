@@ -170,3 +170,62 @@ class _OnboardingState extends State<Onboarding> {
     );
   }
 }
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_gallery/authentication/CreateAccout.dart';
+import 'package:go_gallery/authentication/Login.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class Onboarding extends StatefulWidget {
+  const Onboarding({super.key});
+
+  @override
+  State<Onboarding> createState() => _OnboardingState();
+}
+
+class _OnboardingState extends State<Onboarding> {
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              // Content omitted for brevity
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                      width: screenWidth * 0.90,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAccount()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(236, 183, 102, 1),
+                          shadowColor: Colors.transparent,
+                +         onPrimary: Colors.white,  // Ensures text remains accessible
+                +         overlayColor: MaterialStateProperty.resolveWith((states) {
+                +           if (states.contains(MaterialState.hovered)) return Colors.orangeAccent.withOpacity(0.1);
+                +           if (states.contains(MaterialState.pressed)) return Colors.orangeAccent.withOpacity(0.2);
+                +           return null;  // Defer to material defaults
+                +         }),
+                        ),
+                        child: Text("Create Account"),
+                      ),
+                    ),
+                    // Further content
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
