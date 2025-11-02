@@ -58,3 +58,24 @@ class _DropDownMenuOptionVisitorState extends State<DropDownMenuOptionVisitor> {
     );
   }
 }
+
+Assuming the file `lib/components/DropDownMenuOptionVisitor.dart` includes a ListView.builder or similar widget builder to render dropdown options, modify one of its children like below:
+
+```dart
+GestureDetector(
+  onTap: () => handleSelection(option),
+  onHover: (hovering) {
+    setState(() {
+      _isHovering = hovering;
+    });
+  },
+  child: Container(
+    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+    color: _isHovering ? Colors.lightBlueAccent : Colors.white,
+    child: Text(option,
+      style: TextStyle(
+        color: _isSelected(option) ? Colors.blue : Colors.black,
+      ),
+    ),
+  ),
+)```
