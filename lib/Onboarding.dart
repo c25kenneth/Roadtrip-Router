@@ -170,3 +170,55 @@ class _OnboardingState extends State<Onboarding> {
     );
   }
 }
+
+class Onboarding extends StatefulWidget {
+  const Onboarding({super.key});
+
+  @override
+  State<Onboarding> createState() => _OnboardingState();
+}
+
+class _OnboardingState extends State<Onboarding> {
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(screenWidth * 0.15,
+                    screenWidth * 0.15, screenWidth * 0.15, 32),
+                child: Column(
+                  children: [
+                    // SVG and Text Components...
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                      width: screenWidth * 0.90,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAccount()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          +  overlayColor: MaterialStateProperty.all(Color.fromRGBO(236, 183, 102, 0.1)),
+                        ),
+                        child: Text("Get Started"),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
