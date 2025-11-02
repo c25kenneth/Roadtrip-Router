@@ -45,3 +45,18 @@ required this.onPressed,
         ));
   }
 }
+```dart
+class GoogleSignInButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      // Updated to match application's primary color for consistency
++     style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
+      onPressed: () async {
+        // existing button logic
+      },
+      child: Text('Sign in with Google'),
+    );
+  }
+}
+```
