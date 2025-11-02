@@ -45,3 +45,35 @@ required this.onPressed,
         ));
   }
 }
+class GoogleSignInButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.blueAccent, // Updated background color
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0), // Updated padding
+        textStyle: TextStyle(
+          fontSize: 16, // Ensuring font size is consistent
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      onPressed: () {
+        // Add Google sign-in functionality here
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Image.asset(
+            'assets/google_logo.png',
+            height: 24.0,
+          ),
+          SizedBox(width: 10),
+          Text(
+            'Sign in with Google',
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+}
