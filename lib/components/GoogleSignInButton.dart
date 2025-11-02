@@ -45,3 +45,38 @@ required this.onPressed,
         ));
   }
 }
+import 'package:flutter/material.dart';
+
+class GoogleSignInButton extends StatelessWidget {
+  final Function onPressed;
+
+  GoogleSignInButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      icon: Image.asset('assets/google_logo.png', height: 24.0),
+      label: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Text(
+          'Sign in with Google',
+          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        ),
+      ),
+      onPressed: () => onPressed(),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.black54),
+        shadowColor: MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.5)),
+        elevation: MaterialStateProperty.all<double>(5.0),
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 12.0)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            side: BorderSide(color: Colors.grey),
+          ),
+        ),
+      ),
+    );
+  }
+}
