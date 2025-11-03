@@ -170,3 +170,101 @@ class _OnboardingState extends State<Onboarding> {
     );
   }
 }
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_gallery/authentication/CreateAccout.dart';
+import 'package:go_gallery/authentication/Login.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class Onboarding extends StatefulWidget {
+  const Onboarding({super.key});
+
+  @override
+  State<Onboarding> createState() => _OnboardingState();
+}
+
+class _OnboardingState extends State<Onboarding> {
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(screenWidth * 0.15,
+                    screenWidth * 0.15, screenWidth * 0.15, 32),
+                child: Column(
+                  children: [
+                    SvgPicture.asset(
+                      height: screenHeight * 0.32,
+                      'images/undraw_navigator_a479.svg',
+                    ),
+                    const SizedBox(height: 32),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: GoogleFonts.aBeeZee(
+                          textStyle: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        children: [
+                          TextSpan(
+                            text: 'Make your ',
+                          ),
+-                         TextSpan(
+-                           text: 'Roadtrips ',
+-                           style: TextStyle(
+-                               color: Color.fromRGBO(236, 183, 102, 1)),
+                          ),
+                          TextSpan(
+                            text: 'More ',
+                          ),
++                         TextSpan(
++                           text: 'Roadtrips ',
++                           style: TextStyle(
++                               fontSize: 24, // increased font size
++                               fontWeight: FontWeight.w600, // bolder weight
++                               color: Color.fromRGBO(236, 183, 102, 1)),
++                         ),
+                          TextSpan(
+                            text: 'Dynamic',
+                            style: TextStyle(
+                                color: Color.fromRGBO(236, 183, 102, 1)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      ' Whether you’re dreaming of coastal drives, mountain escapes, or the best foodie stops across the country, Roadtrip Router is here to make your journey unforgettable.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.aBeeZee(
+                        textStyle: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF757575),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Container(
+                      width: screenWidth * 0.90,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAccount()));
+                        },
