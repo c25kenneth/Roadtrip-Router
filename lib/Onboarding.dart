@@ -170,3 +170,23 @@ class _OnboardingState extends State<Onboarding> {
     );
   }
 }
+
+Container(
+                    width: screenWidth * 0.90,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAccount()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          // Original styling
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                +         overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                +           if (states.contains(MaterialState.pressed)) return Colors.blueAccent.withOpacity(0.5);
+                +           return null;
+                +         }),
+                      ),
+                      child: Text('Create Account'),
+                    ),
+                  ),
